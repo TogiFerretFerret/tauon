@@ -25290,6 +25290,7 @@ class Over:
 		subtitle: str = "",
 		accent: ColourRGBA | None = None,
 		click: bool = False,
+		show_active_bar: bool = False,
 	) -> bool:
 		if accent is None:
 			accent = self.settings_page_accent()
@@ -25309,7 +25310,7 @@ class Over:
 			border = alpha_blend(alpha_mod(accent, 90), border)
 
 		self.ddt.bordered_rect((x, y, w, h), fill, border, round(1 * self.gui.scale))
-		if active:
+		if active and show_active_bar:
 			self.ddt.rect((x, y, round(4 * self.gui.scale), h), accent)
 
 		self.fields.add((x, y, w, h))
@@ -25583,6 +25584,7 @@ class Over:
 		active: bool,
 		callback: Callable[[], None] | None = None,
 		accent: ColourRGBA | None = None,
+		show_active_bar: bool = False,
 	) -> bool:
 		if accent is None:
 			accent = self.settings_page_accent()
@@ -25599,7 +25601,7 @@ class Over:
 			border = alpha_blend(alpha_mod(accent, 90), border)
 
 		self.ddt.bordered_rect((x, y, w, h), fill, border, round(1 * self.gui.scale))
-		if active:
+		if active and show_active_bar:
 			self.ddt.rect((x, y, round(4 * self.gui.scale), h), accent)
 
 		self.fields.add((x, y, w, h))
