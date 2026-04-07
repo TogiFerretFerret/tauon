@@ -47278,6 +47278,7 @@ def main(holder: Holder) -> None:
 			prefs.break_enable = prefs.view_prefs["break-enable"]
 		else:
 			logging.warning("break-enable not found in view_prefs[] when trying to load settings! First run?")
+		prefs.break_enable = False  # Force disable folder breaks
 		#custom_line_mode  = view_prefs['custom-line']
 		#thick_lines       = view_prefs['thick-lines']
 		if "append-date" in prefs.view_prefs:
