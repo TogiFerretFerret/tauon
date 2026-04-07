@@ -1483,11 +1483,14 @@ class ColoursClass:
 		self.artist_bio_text       = ColourRGBA(230, 230, 230, 255)
 
 	def apply_transparency(self) -> None:
-		self.top_panel_background.a = 140
-		self.side_panel_background.a = 140
-		self.art_box.a = 100
-		self.window_frame.a = 100
-		self.bottom_panel_colour.a = 200
+		self.top_panel_background.a = 100
+		self.side_panel_background.a = 90
+		self.playlist_panel_background.a = 80
+		self.gallery_background.a = 80
+		self.art_box.a = 70
+		self.window_frame.a = 60
+		self.bottom_panel_colour.a = 120
+		self.queue_panel_background.a = 80
 
 		# colours.playlist_panel_background.a = 220
 		# colours.playlist_box_background  = [0, 0, 0, 100]
