@@ -1483,17 +1483,17 @@ class ColoursClass:
 		self.artist_bio_text       = ColourRGBA(230, 230, 230, 255)
 
 	def apply_transparency(self) -> None:
-		self.top_panel_background.a = 100
-		self.side_panel_background.a = 90
+		self.top_panel_background.a = 210
+		self.side_panel_background.a = 200
 		if hasattr(self, 'playlist_panel_background') and self.playlist_panel_background:
-			self.playlist_panel_background.a = 80
+			self.playlist_panel_background.a = 195
 		if hasattr(self, 'gallery_background') and self.gallery_background:
-			self.gallery_background.a = 80
-		self.art_box.a = 70
-		self.window_frame.a = 60
-		self.bottom_panel_colour.a = 120
+			self.gallery_background.a = 195
+		self.art_box.a = 180
+		self.window_frame.a = 160
+		self.bottom_panel_colour.a = 220
 		if hasattr(self, 'queue_panel_background') and self.queue_panel_background:
-			self.queue_panel_background.a = 80
+			self.queue_panel_background.a = 195
 
 		# colours.playlist_panel_background.a = 220
 		# colours.playlist_box_background  = [0, 0, 0, 100]
