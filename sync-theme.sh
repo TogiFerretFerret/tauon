@@ -19,7 +19,7 @@ def hex2rgb(h):
 def dim(h, factor=0.4):
     h = h.lstrip("#")
     r,g,b = int(h[0:2],16), int(h[2:4],16), int(h[4:6],16)
-    return f"{int(r*factor)},{int(g*factor)},{int(b*factor)}"
+    return f"{min(255,int(r*factor))},{min(255,int(g*factor))},{min(255,int(b*factor))}"
 
 bg = dim(d["special"]["background"], 0.8)
 primary = hex2rgb(c["color4"])
