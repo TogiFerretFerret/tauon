@@ -59,7 +59,7 @@ class Prefs:
 	update_title:  bool = False
 	scroll_enable: bool = True
 	smooth_scroll_enable: bool = False
-	break_enable:  bool = True
+	break_enable:  bool = False
 
 	transcode_codec:   str = "opus"
 	transcode_mode:    str = "single"
