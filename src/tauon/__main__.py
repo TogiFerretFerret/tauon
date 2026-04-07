@@ -328,7 +328,7 @@ if sys.platform == "darwin" and hasattr(sdl3, "SDL_HINT_MAC_SCROLL_MOMENTUM"):
 # sdl3.SDL_SetHint(sdl3.SDL_HINT_APP_ID, t_id.encode("utf-8"))
 # sdl3.SDL_SetHint(sdl3.SDL_HINT_APP_NAME, t_title.encode("utf-8"))
 
-draw_border = True
+draw_border = True  # Use own window decorations (borderless)
 w = 1120
 h = 600
 if phone:
@@ -337,7 +337,7 @@ if phone:
 window_default_size: tuple[int, int] = (w, h)
 window_size: list[int] = [w, h]
 logical_size: list[int] = [w, h]
-window_opacity = 1
+window_opacity = 0.88
 scale = 1
 if sys.platform == "darwin":
 	scale = 2

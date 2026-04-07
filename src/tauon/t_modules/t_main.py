@@ -1425,10 +1425,10 @@ class ColoursClass:
 		self.corner_button        = ColourRGBA(255, 255, 255, 50)  # [60, 60, 60, 255]
 		self.corner_button_active = ColourRGBA(255, 255, 255, 230)  # [230, 230, 230, 255]
 
-		self.window_buttons_bg        = ColourRGBA(0, 0, 0, 50)
-		self.window_buttons_bg_over   = ColourRGBA(255, 255, 255, 10)  # [80, 80, 80, 120]
-		self.window_buttons_icon_over = ColourRGBA(255, 255, 255, 60)
-		self.window_button_icon_off   = ColourRGBA(255, 255, 255, 40)
+		self.window_buttons_bg        = ColourRGBA(0, 0, 0, 0)
+		self.window_buttons_bg_over   = ColourRGBA(255, 255, 255, 15)
+		self.window_buttons_icon_over = ColourRGBA(255, 255, 255, 80)
+		self.window_button_icon_off   = ColourRGBA(255, 255, 255, 30)
 		self.window_button_x_on: ColourRGBA | None = None
 		self.window_button_x_off = self.window_button_icon_off
 
