@@ -6648,11 +6648,16 @@ class Tauon:
 			gui.cursor_want = 11
 
 		colour = colours.window_frame
+		r = round(12 * gui.scale)  # corner radius
 
-		ddt.rect((0, 0, window_size[0], 1 * gui.scale), colour)
-		ddt.rect((0, 0, 1 * gui.scale, window_size[1]), colour)
-		ddt.rect((0, window_size[1] - 1 * gui.scale, window_size[0], 1 * gui.scale), colour)
-		ddt.rect((window_size[0] - 1 * gui.scale, 0, 1 * gui.scale, window_size[1]), colour)
+		# Top border with gap for corners
+		ddt.rect((r, 0, window_size[0] - 2 * r, 1 * gui.scale), colour)
+		# Left border with gap for corners
+		ddt.rect((0, r, 1 * gui.scale, window_size[1] - 2 * r), colour)
+		# Bottom border with gap for corners
+		ddt.rect((r, window_size[1] - 1 * gui.scale, window_size[0] - 2 * r, 1 * gui.scale), colour)
+		# Right border with gap for corners
+		ddt.rect((window_size[0] - 1 * gui.scale, r, 1 * gui.scale, window_size[1] - 2 * r), colour)
 
 	def prime_fonts(self) -> None:
 		standard_font = self.prefs.linux_font
