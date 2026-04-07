@@ -337,7 +337,7 @@ if phone:
 window_default_size: tuple[int, int] = (w, h)
 window_size: list[int] = [w, h]
 logical_size: list[int] = [w, h]
-window_opacity = 0.88
+window_opacity = 0.78
 scale = 1
 if sys.platform == "darwin":
 	scale = 2
