@@ -17522,7 +17522,7 @@ class Tauon:
 				line = self.track_number_process(n_track.track_number)
 				indexLine = line
 
-				if self.prefs.use_absolute_track_index and self.pctl.multi_playlist[self.pctl.active_playlist_viewing].hide_title:
+				if self.prefs.use_absolute_track_index:
 					indexLine = str(p_track)
 					if len(indexLine) > 3:
 						indexLine += "  "
@@ -34092,7 +34092,7 @@ class StandardPlaylist:
 								colour = colours.index_playing
 						elif item[0] == "#":
 
-							if prefs.use_absolute_track_index and pctl.multi_playlist[pctl.active_playlist_viewing].hide_title:
+							if prefs.use_absolute_track_index:
 								text = str(p_track)
 							else:
 								text = tauon.track_number_process(n_track.track_number)
@@ -43956,6 +43956,7 @@ def load_prefs(bag: Bag) -> None:
 	prefs.use_absolute_track_index = cf.sync_add(
 		"bool", "absolute-track-indices", prefs.use_absolute_track_index,
 		"For playlists with titles disabled only")
+	prefs.use_absolute_track_index = True  # Force absolute indexing
 	prefs.hide_bottom_title = cf.sync_add(
 		"bool", "auto-hide-bottom-title", prefs.hide_bottom_title,
 		"Hide title in bottom panel when already shown in side panel")
