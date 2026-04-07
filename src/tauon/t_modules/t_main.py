@@ -17546,6 +17546,8 @@ class Tauon:
 				line = \
 					os.path.splitext(n_track.filename)[
 						0]
+				if self.prefs.use_absolute_track_index:
+					indexLine = str(p_track)
 
 			if p_track >= len(self.pctl.default_playlist):
 				self.gui.pl_update += 1
