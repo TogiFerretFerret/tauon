@@ -1485,12 +1485,15 @@ class ColoursClass:
 	def apply_transparency(self) -> None:
 		self.top_panel_background.a = 100
 		self.side_panel_background.a = 90
-		self.playlist_panel_background.a = 80
-		self.gallery_background.a = 80
+		if hasattr(self, 'playlist_panel_background') and self.playlist_panel_background:
+			self.playlist_panel_background.a = 80
+		if hasattr(self, 'gallery_background') and self.gallery_background:
+			self.gallery_background.a = 80
 		self.art_box.a = 70
 		self.window_frame.a = 60
 		self.bottom_panel_colour.a = 120
-		self.queue_panel_background.a = 80
+		if hasattr(self, 'queue_panel_background') and self.queue_panel_background:
+			self.queue_panel_background.a = 80
 
 		# colours.playlist_panel_background.a = 220
 		# colours.playlist_box_background  = [0, 0, 0, 100]
