@@ -249,6 +249,37 @@ class TDraw:
 		# else:
 		# 	sdl3.SDL_RenderDrawRect(self.renderer, self.sdlrect)
 
+	def rect_rounded(self, rectangle: tuple[int, int, int, int], colour: ColourRGBA, radius: int = 8) -> None:
+		"""Draw a filled rounded rectangle using overlapping rects (fast approximation)."""
+		x, y, w, h = float(rectangle[0]), float(rectangle[1]), float(rectangle[2]), float(rectangle[3])
+		r = min(radius, int(w / 2), int(h / 2))
+		sdl3.SDL_SetRenderDrawColor(self.renderer, colour.r, colour.g, colour.b, colour.a)
+		# Center body
+		self.sdlrect.x = x + r; self.sdlrect.y = y; self.sdlrect.w = w - 2 * r; self.sdlrect.h = h
+		sdl3.SDL_RenderFillRect(self.renderer, self.sdlrect)
+		# Left strip
+		self.sdlrect.x = x; self.sdlrect.y = y + r; self.sdlrect.w = r; self.sdlrect.h = h - 2 * r
+		sdl3.SDL_RenderFillRect(self.renderer, self.sdlrect)
+		# Right strip
+		self.sdlrect.x = x + w - r; self.sdlrect.y = y + r; self.sdlrect.w = r; self.sdlrect.h = h - 2 * r
+		sdl3.SDL_RenderFillRect(self.renderer, self.sdlrect)
+		# Corners (filled circles approximated with small rects)
+		import math
+		for i in range(r):
+			dx = int(math.sqrt(r * r - i * i))
+			# Top-left
+			self.sdlrect.x = x + r - dx; self.sdlrect.y = y + r - i - 1; self.sdlrect.w = dx; self.sdlrect.h = 1
+			sdl3.SDL_RenderFillRect(self.renderer, self.sdlrect)
+			# Top-right
+			self.sdlrect.x = x + w - r; self.sdlrect.y = y + r - i - 1; self.sdlrect.w = dx; self.sdlrect.h = 1
+			sdl3.SDL_RenderFillRect(self.renderer, self.sdlrect)
+			# Bottom-left
+			self.sdlrect.x = x + r - dx; self.sdlrect.y = y + h - r + i; self.sdlrect.w = dx; self.sdlrect.h = 1
+			sdl3.SDL_RenderFillRect(self.renderer, self.sdlrect)
+			# Bottom-right
+			self.sdlrect.x = x + w - r; self.sdlrect.y = y + h - r + i; self.sdlrect.w = dx; self.sdlrect.h = 1
+			sdl3.SDL_RenderFillRect(self.renderer, self.sdlrect)
+
 	def bordered_rect(
 		self, rectangle: tuple[int, int, int, int], fill_colour: ColourRGBA, outer_colour: ColourRGBA, border_size: int
 	) -> None:
