@@ -277,7 +277,7 @@ class Prefs:
 	ui_lang: str = "auto"
 	side_panel_layout = 0
 	side_panel_left: bool = False
-	use_absolute_track_index: bool = False
+	use_absolute_track_index: bool = True
 
 	hide_bottom_title: bool = True
 	auto_goto_playing: bool = False
