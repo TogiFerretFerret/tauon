@@ -1494,9 +1494,20 @@ class ColoursClass:
 		self.bottom_panel_colour.a = 220
 		if hasattr(self, 'queue_card_background') and self.queue_card_background:
 			self.queue_card_background.a = 195
-
-		# colours.playlist_panel_background.a = 220
-		# colours.playlist_box_background  = [0, 0, 0, 100]
+		if hasattr(self, 'column_bar_background') and self.column_bar_background:
+			self.column_bar_background.a = 200
+		if hasattr(self, 'playlist_box_background') and self.playlist_box_background:
+			self.playlist_box_background.a = 195
+		if hasattr(self, 'lyrics_panel_background') and self.lyrics_panel_background:
+			self.lyrics_panel_background.a = 200
+		if hasattr(self, 'artist_bio_background') and self.artist_bio_background:
+			self.artist_bio_background.a = 195
+		if hasattr(self, 'tab_background') and self.tab_background:
+			self.tab_background.a = 200
+		if hasattr(self, 'tab_background_active') and self.tab_background_active:
+			self.tab_background_active.a = 210
+		if hasattr(self, 'queue_background') and self.queue_background:
+			self.queue_background.a = 195
 
 	def post_config(self) -> None:
 		if self.box_thumb_background is None:
