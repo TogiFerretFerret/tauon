@@ -6429,6 +6429,8 @@ class Tauon:
 		ddt         = self.ddt
 		prefs       = self.prefs
 
+		return
+
 		# rect = (window_size[0] - 55 * gui.scale, window_size[1] - 35 * gui.scale, 53 * gui.scale, 33 * gui.scale)
 		# self.fields.add(rect)
 		# prefs.left_window_control = not inp.key_shift_down
@@ -17770,6 +17772,33 @@ class Tauon:
 	def signal_handler(self, signum, frame) -> None:
 		signal.signal(signum, signal.SIG_IGN) # ignore additional signals
 		self.exit(reason="SIGINT received")
+
+	def theme_reload_handler(self, signum, frame) -> None:
+		self.gui.reload_theme = True
+		self.gui.update += 1
+
+	def start_theme_watcher(self) -> None:
+		import ctypes, struct, threading
+		try:
+			libc = ctypes.CDLL("libc.so.6", use_errno=True)
+		except Exception:
+			return
+		IN_CLOSE_WRITE = 0x00000008
+		theme_dir = str(self.dirs.user_directory / "theme")
+		def watch() -> None:
+			ifd = libc.inotify_init()
+			if ifd < 0:
+				return
+			libc.inotify_add_watch(ifd, theme_dir.encode(), IN_CLOSE_WRITE)
+			buf = ctypes.create_string_buffer(4096)
+			while True:
+				n = libc.read(ifd, buf, 4096)
+				if n < 0:
+					break
+				self.gui.reload_theme = True
+				self.gui.update += 1
+		t = threading.Thread(target=watch, daemon=True)
+		t.start()
 
 	def save_state(self) -> None:
 		gui   = self.gui
@@ -43709,6 +43738,7 @@ def save_prefs(bag: Bag) -> None:
 
 	cf.update_value("enable-mpris", prefs.enable_mpris)
 	cf.update_value("hide-maximize-button", prefs.force_hide_max_button)
+	cf.update_value("hide-window-controls", prefs.force_hide_window_controls)
 	cf.update_value("restore-window-position", prefs.save_window_position)
 	cf.update_value("mini-mode-always-on-top", prefs.mini_mode_on_top)
 	cf.update_value("resume-playback-on-restart", prefs.reload_play_state)
@@ -44067,6 +44097,7 @@ def load_prefs(bag: Bag) -> None:
 	prefs.use_gamepad = cf.sync_add("bool", "use-gamepad", prefs.use_gamepad, "Use game controller for UI control, restart on change.")
 	prefs.use_tray = cf.sync_add("bool", "use-system-tray", prefs.use_tray)
 	prefs.force_hide_max_button = cf.sync_add("bool", "hide-maximize-button", prefs.force_hide_max_button)
+	prefs.force_hide_window_controls = cf.sync_add("bool", "hide-window-controls", prefs.force_hide_window_controls)
 	prefs.save_window_position = cf.sync_add(
 		"bool", "restore-window-position", prefs.save_window_position,
 		"Save and restore the last window position on desktop on open")
@@ -47360,6 +47391,8 @@ def main(holder: Holder) -> None:
 	tauon.search_string_cache     = search_string_cache
 	tauon.search_dia_string_cache = search_dia_string_cache
 	signal.signal(signal.SIGINT, tauon.signal_handler)
+	signal.signal(signal.SIGUSR1, tauon.theme_reload_handler)
+	tauon.start_theme_watcher()
 	pctl = tauon.pctl
 	try:
 		pctl.stop_mode = StopMode(bag.loaded_stop_mode)

@@ -342,6 +342,7 @@ class Prefs:
 	remove_network_tracks: bool = False
 	bypass_transcode: bool = False
 	force_hide_max_button: bool = False
+	force_hide_window_controls: bool = False
 	zoom_art: bool = False
 	auto_rec: bool = False
 	radio_record_codec = "OPUS"
